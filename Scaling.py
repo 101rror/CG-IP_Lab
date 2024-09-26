@@ -12,12 +12,40 @@ def draw_axes():
     glVertex2f(0, 10)
     glEnd()
 
-def draw_points():
+def basic_triangle(x1, y1, x2, y2, x3, y3):
     glColor3f(1.0, 0.0, 0.0)  # Red color for points
     glPointSize(5)
-    glBegin(GL_POINTS)
-    glVertex2f(5, 4)  # (5, 4)
-    glVertex2f(6, 2)  # (6, 2)
+    glBegin(GL_LINES)
+    glVertex2f(x1, y1)  # (5, 4)
+    glVertex2f(x2, y2)
+    
+    glVertex2f(x2, y2)
+    glVertex2f(x3, y3)
+    
+    glVertex2f(x3, y3)
+    glVertex2f(x1, y1)
+    glEnd()
+
+def scaled_triangle(x1, y1, x2, y2, x3, y3, scale):
+    
+    x1 = x1*scale
+    y1 = y1*scale
+    
+    x2 = x2*scale
+    y2 = y2*scale
+    
+    x3 = x3*scale
+    y3 = y3*scale
+    
+    glColor3f(0.0, 1.0, 0.0)  # Green color for points
+    glPointSize(5)
+    glBegin(GL_LINES)
+    glVertex2f(x1, y1)  # (5, 4)
+    glVertex2f(x2, y2)
+    glVertex2f(x2, y2)
+    glVertex2f(x3, y3)
+    glVertex2f(x3, y3)
+    glVertex2f(x1, y1)
     glEnd()
 
 def display():
@@ -25,12 +53,14 @@ def display():
     glLoadIdentity()
     
     draw_axes()
-    draw_points()
+    
+    basic_triangle(1, 1, 3, 3, 5, 2)
+    scaled_triangle(1, 1, 3, 3, 5, 2, 2)
     
     glFlush()
     glutSwapBuffers()
 
-def reshape(width, height):
+def reshape(width, height): 
     glViewport(0, 0, width, height)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
